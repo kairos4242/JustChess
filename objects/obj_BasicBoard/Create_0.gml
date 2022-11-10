@@ -45,6 +45,7 @@ for (i = 0; i < BOARD_SIZE; i++) {
 	with current_pawn {
 		controller = "Black" 
 		board = other
+		facing = "Down"
 	}
 	ds_list_add(black_piece_list, current_pawn)
 	with ds_grid_get(square_grid, i, 1) {
@@ -58,6 +59,7 @@ for (i = 0; i < BOARD_SIZE; i++) {
 	with current_pawn {
 		controller = "White" 
 		board = other
+		facing = "Up"
 	}
 	ds_list_add(white_piece_list, current_pawn)
 	with ds_grid_get(square_grid, i, BOARD_SIZE - 2) {

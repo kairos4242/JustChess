@@ -4,3 +4,5 @@
 controller = -1
 selected = false
 board = -1
+moves = 0
+facing = "Up"
