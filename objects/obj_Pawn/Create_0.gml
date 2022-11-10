@@ -6,3 +6,5 @@ selected = false
 board = -1
 moves = 0
 facing = "Up"
+square = -1
+last_moved = false

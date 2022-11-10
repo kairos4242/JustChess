@@ -9,4 +9,4 @@ switch controller {
 	default: break;
 }
 
-if (selected) draw_circle(x, y, 20, false)
+if (selected) draw_circle(x, y, 20, true)

@@ -7,6 +7,7 @@ square_grid = ds_grid_create(BOARD_SIZE, BOARD_SIZE)
 black_piece_list = ds_list_create()
 white_piece_list = ds_list_create()
 selected = -1
+last_moved = -1
 players_list = ds_list_create()
 ds_list_add(players_list, "White")
 ds_list_add(players_list, "Black")
@@ -42,13 +43,15 @@ for (i = 0; i < BOARD_SIZE; i++) {
 //create black pawns
 for (i = 0; i < BOARD_SIZE; i++) {
 	current_pawn = instance_create_depth(x + coord_to_pixel_pos(i), y + coord_to_pixel_pos(1), 50, obj_Pawn)
+	current_square = ds_grid_get(square_grid, i, 1)
 	with current_pawn {
 		controller = "Black" 
 		board = other
 		facing = "Down"
+		square = other.current_square
 	}
 	ds_list_add(black_piece_list, current_pawn)
-	with ds_grid_get(square_grid, i, 1) {
+	with current_square {
 		piece = other.current_pawn
 	}
 }

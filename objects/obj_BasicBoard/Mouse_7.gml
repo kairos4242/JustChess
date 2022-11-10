@@ -8,9 +8,14 @@ if selected != -1 {
 	square_move_from = instance_position(selected.x, selected.y, obj_Square)
 	
 	//check legality of move
-	if is_legal_move(square_move_from.x_pos, square_move_from.y_pos, square_move_to.x_pos, square_move_to.y_pos, selected) {
+	if is_legal_move(square_move_from.x_pos, square_move_from.y_pos, square_move_to.x_pos, square_move_to.y_pos, selected, true) {
+		//update last moved
+		if last_moved != -1 with last_moved last_moved = false
+		last_moved = square_move_from.piece
+		square_move_from.piece.last_moved = true
+		
 		//check if there is an piece already on square, and if so destroy it
-		//should this check for an opponents piece instead of just a piece? Is there a scenario where a piece could legally destroy its own pieces?
+		//should this check for an opponents piece instead of just a piece? Is there a scenario where a piece could legally destroy its own allies?
 		//seems unnecessary to validate it two places either way
 		if square_move_to.piece != -1
 		{
@@ -25,6 +30,7 @@ if selected != -1 {
 			y = other.square_move_to.y
 			selected = false
 			moves++
+			square = other.square_move_to
 		}
 		selected = -1
 	} else {
