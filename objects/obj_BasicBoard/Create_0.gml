@@ -35,7 +35,7 @@ for (i = 0; i < BOARD_SIZE; i++) {
 			if j > 0 curr_square.top_neighbor = ds_grid_get(square_grid, i, j - 1)
 			if j < BOARD_SIZE - 1 curr_square.bottom_neighbor = ds_grid_get(square_grid, i, j + 1)
 			if i > 0 curr_square.left_neighbor = ds_grid_get(square_grid, i - 1, j)
-			if i < BOARD_SIZE - 1 curr_square.bottom_neighbor = ds_grid_get(square_grid, i + 1, j)
+			if i < BOARD_SIZE - 1 curr_square.right_neighbor = ds_grid_get(square_grid, i + 1, j)
 		}
 }
 
