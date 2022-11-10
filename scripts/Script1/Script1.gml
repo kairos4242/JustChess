@@ -22,34 +22,76 @@ function coord_to_pixel_pos(coord){
 }
 
 function is_legal_move(start_x, start_y, end_x, end_y, piece) {
+	//can we genericize this to take in a piece attack/move schema and work off that?
+	//fairy chess has such a thing to describe pieces
+	
 	//takes in two tuples of coords and the id of a real piece on the board
 	//cause we need to check facing for pawns or other directional pieces
 	
+	//ensure no friendly piece already on square
+	if piece_of_colour_on_square(end_x, end_y, piece.controller) return false
+	
+	//handle facing more elegantly
+	if piece.facing == "Up"  facing_sign = -1 
+	else if piece.facing == "Down" facing_sign = 1
+	
+	x_diff = end_x - start_x
+	y_diff = end_y - start_y
+	
 	//just pawn checking for now
 	if piece.object_index == obj_Pawn {
-		//no horizontal movement allowed
-		x_diff = start_x - end_x
-		if x_diff != 0 return false
-		//check for double move allowed
+		
+		//no horizontal movement allowed except capture
+		
+		if abs(x_diff) > 1 return false
+		
+		//if we're moving one to the side and one up and onto an enemy piece, valid capture
+		if abs(x_diff) == 1 and end_y - start_y == (1 * facing_sign) and piece_of_other_colour_on_square(end_x, end_y,piece.controller) return true
+		
+		//check for if double move allowed
 		if piece.moves == 0 {
-			if piece.facing == "Up" {
-				if end_y - start_y == -2 return true
-			}
-			if piece.facing == "Down" {
-				if end_y - start_y == 2 return true
-			}
+			if y_diff == (2 * facing_sign) and !piece_of_other_colour_on_square(end_x, end_y, piece.controller) return true
 		}
 		//then check single move
-		if piece.facing == "Up" {
-			if end_y - start_y == -1 return true
-		}
-		if piece.facing == "Down" {
-			if end_y - start_y == 1 return true
-		}
-		return false
-	}
-	else {
+		if y_diff == (1 * facing_sign) and !piece_of_other_colour_on_square(end_x, end_y, piece.controller) return true
+		
+	} else {
+		
 		show_debug_message("Unrecognized piece type for is_legal_move!")
 		return false
+		
 	}
+}
+
+function piece_of_colour_on_square(square_x, square_y, colour) {
+	
+	//checks grid to see if a piece of said colour is on the square
+	square_piece = ds_grid_get(square_grid, square_x, square_y).piece
+	if square_piece == -1 return false
+	if square_piece.controller == colour return true else return false
+	
+}
+
+function piece_of_other_colour_on_square(square_x, square_y, colour) {
+	
+	//checks grid to see if a piece of said colour is on the square
+	square_piece = ds_grid_get(square_grid, square_x, square_y).piece
+	if square_piece == -1 return false
+	if square_piece.controller != colour return true else return false
+	
+}
+
+function destroy_piece(piece_to_destroy) {
+	//need to genericize piece lists, the ifs here are temp til I do that
+	//will be an issue once games with 3+ sides exist
+	//also, doesn't remove piece from associated square
+	//not currently necessary bc handled elsewhere but just worth noting
+	//could bite you in future
+	if piece_to_destroy.controller == "White" {
+		ds_list_delete(white_piece_list, ds_list_find_index(white_piece_list, piece_to_destroy))
+	}
+	else if piece_to_destroy.controller == "Black" {
+		ds_list_delete(black_piece_list, ds_list_find_index(black_piece_list, piece_to_destroy))
+	}
+	instance_destroy(piece_to_destroy)
 }

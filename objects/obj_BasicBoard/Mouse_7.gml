@@ -9,6 +9,14 @@ if selected != -1 {
 	
 	//check legality of move
 	if is_legal_move(square_move_from.x_pos, square_move_from.y_pos, square_move_to.x_pos, square_move_to.y_pos, selected) {
+		//check if there is an piece already on square, and if so destroy it
+		//should this check for an opponents piece instead of just a piece? Is there a scenario where a piece could legally destroy its own pieces?
+		//seems unnecessary to validate it two places either way
+		if square_move_to.piece != -1
+		{
+			destroy_piece(square_move_to.piece)
+		}
+		
 		//move piece
 		with square_move_from piece = -1
 		with square_move_to piece = other.selected
