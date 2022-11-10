@@ -7,12 +7,22 @@ square_grid = ds_grid_create(BOARD_SIZE, BOARD_SIZE)
 black_piece_list = ds_list_create()
 white_piece_list = ds_list_create()
 selected = -1
+players_list = ds_list_create()
+ds_list_add(players_list, "White")
+ds_list_add(players_list, "Black")
+turn_queue = ds_queue_create()//will this even get used? Is it necessary? Could be helpful down the line for turn order shenanigans
+ds_queue_enqueue(turn_queue, "White")
+ds_queue_enqueue(turn_queue, "Black")
 
 
 //create all the squares at target positions
 for (i = 0; i < BOARD_SIZE; i++) {
 		for (j = 0; j < BOARD_SIZE; j++) {
 			curr_square = instance_create_depth(x + coord_to_pixel_pos(i), y + coord_to_pixel_pos(j), 100, obj_Square)
+			with curr_square {
+				x_pos = other.i
+				y_pos = other.j
+			}
 			ds_grid_add(square_grid, i, j, curr_square)
 		}
 }
