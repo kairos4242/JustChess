@@ -3,6 +3,7 @@
   "resourceVersion": "1.6",
   "name": "JustChess",
   "resources": [
+    {"id":{"name":"w_knight_1x","path":"sprites/w_knight_1x/w_knight_1x.yy",},"order":6,},
     {"id":{"name":"w_queen_1x","path":"sprites/w_queen_1x/w_queen_1x.yy",},"order":4,},
     {"id":{"name":"b_knight_1x","path":"sprites/b_knight_1x/b_knight_1x.yy",},"order":2,},
     {"id":{"name":"w_king_1x","path":"sprites/w_king_1x/w_king_1x.yy",},"order":1,},
@@ -11,7 +12,7 @@
     {"id":{"name":"w_rook_1x","path":"sprites/w_rook_1x/w_rook_1x.yy",},"order":5,},
     {"id":{"name":"b_king_1x","path":"sprites/b_king_1x/b_king_1x.yy",},"order":1,},
     {"id":{"name":"w_bishop_1x","path":"sprites/w_bishop_1x/w_bishop_1x.yy",},"order":0,},
-    {"id":{"name":"w_knight_1x","path":"sprites/w_knight_1x/w_knight_1x.yy",},"order":2,},
+    {"id":{"name":"Brown_Board","path":"sprites/Brown_Board/Brown_Board.yy",},"order":0,},
     {"id":{"name":"b_queen_1x","path":"sprites/b_queen_1x/b_queen_1x.yy",},"order":4,},
     {"id":{"name":"b_pawn_1x","path":"sprites/b_pawn_1x/b_pawn_1x.yy",},"order":3,},
     {"id":{"name":"b_bishop_1x","path":"sprites/b_bishop_1x/b_bishop_1x.yy",},"order":0,},
