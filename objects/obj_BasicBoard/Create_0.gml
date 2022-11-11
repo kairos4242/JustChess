@@ -57,3 +57,23 @@ create_piece(BOARD_SIZE - 1, 0, obj_Rook, "Black", "Down")
 //create white rooks
 create_piece(0, BOARD_SIZE - 1, obj_Rook, "White", "Up")
 create_piece(BOARD_SIZE - 1, BOARD_SIZE - 1, obj_Rook, "White", "Up")
+
+//create kings
+create_piece(4, 0, obj_King, "Black", "Down")
+create_piece(4, BOARD_SIZE - 1, obj_King, "White", "Up")
+
+//create queens
+create_piece(3, 0, obj_Queen, "Black", "Down")
+create_piece(3, BOARD_SIZE - 1, obj_Queen, "White", "Up")
+
+//create bishops
+create_piece(2, 0, obj_Bishop, "Black", "Down")
+create_piece(5, 0, obj_Bishop, "Black", "Down")
+create_piece(2, BOARD_SIZE - 1, obj_Bishop, "White", "Up")
+create_piece(5, BOARD_SIZE - 1, obj_Bishop, "White", "Up")
+
+//create knights
+create_piece(1, 0, obj_Knight, "Black", "Down")
+create_piece(6, 0, obj_Knight, "Black", "Down")
+create_piece(1, BOARD_SIZE - 1, obj_Knight, "White", "Up")
+create_piece(6, BOARD_SIZE - 1, obj_Knight, "White", "Up")

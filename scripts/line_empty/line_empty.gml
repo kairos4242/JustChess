@@ -27,7 +27,7 @@ function line_empty(x1, y1, x2, y2){
 		}
 		return true
 	}
-	else if (x_diff == y_diff) {
+	else if (abs(x_diff) == abs(y_diff)) {
 		//we have a diagonal
 		current_x = x1 + sign(x_diff)//because we want to ignore the square we're currently on
 		current_y = y1 + sign(y_diff)//because we want to ignore the square we're currently on

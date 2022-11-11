@@ -40,6 +40,32 @@ function is_legal_move(start_x, start_y, end_x, end_y, piece, actually_make_move
 	x_diff = end_x - start_x
 	y_diff = end_y - start_y
 	
+	//knight checking
+	if piece.object_index == obj_Knight {
+		if (abs(x_diff) == 1 and abs(y_diff) == 2) or (abs(x_diff) == 2 and abs(y_diff) == 1) return true
+		return false
+	}
+	
+	//bishop checking
+	if piece.object_index == obj_Bishop {
+		//check for diagonal
+		if abs(x_diff) != abs(y_diff) return false
+		if line_empty(start_x, start_y, end_x, end_y) return true else return false
+	}
+	
+	//queen checking
+	if piece.object_index == obj_Queen {
+		//check for one of horizontal, vertical, diagonal
+		if x_diff != 0 and y_diff != 0 and abs(x_diff) != abs(y_diff) return false
+		if line_empty(start_x, start_y, end_x, end_y) return true else return false
+	}
+	
+	//king checking
+	if piece.object_index == obj_King {
+		if abs(x_diff) > 1 or abs(y_diff) > 1 return false
+		return true
+	}
+	
 	//rook checking
 	if piece.object_index == obj_Rook {
 		if x_diff == 0 or y_diff == 0 {
@@ -54,7 +80,6 @@ function is_legal_move(start_x, start_y, end_x, end_y, piece, actually_make_move
 		//no horizontal movement allowed except capture
 		
 		if abs(x_diff) > 1 return false
-		
 		
 		if abs(x_diff) == 1 {
 			
