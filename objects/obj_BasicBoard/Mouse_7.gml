@@ -12,7 +12,7 @@ if selected != -1 {
 		//update last moved
 		if last_moved != -1 with last_moved last_moved = false
 		last_moved = square_move_from.piece
-		square_move_from.piece.last_moved = true
+		with square_move_from.piece last_moved = true
 		
 		//check if there is an piece already on square, and if so destroy it
 		//should this check for an opponents piece instead of just a piece? Is there a scenario where a piece could legally destroy its own allies?

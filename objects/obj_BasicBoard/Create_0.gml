@@ -42,30 +42,18 @@ for (i = 0; i < BOARD_SIZE; i++) {
 
 //create black pawns
 for (i = 0; i < BOARD_SIZE; i++) {
-	current_pawn = instance_create_depth(x + coord_to_pixel_pos(i), y + coord_to_pixel_pos(1), 50, obj_Pawn)
-	current_square = ds_grid_get(square_grid, i, 1)
-	with current_pawn {
-		controller = "Black" 
-		board = other
-		facing = "Down"
-		square = other.current_square
-	}
-	ds_list_add(black_piece_list, current_pawn)
-	with current_square {
-		piece = other.current_pawn
-	}
+	create_piece(i, 1, obj_Pawn, "Black", "Down")
 }
 
 //create white pawns
 for (i = 0; i < BOARD_SIZE; i++) {
-	current_pawn = instance_create_depth(x + coord_to_pixel_pos(i), y + coord_to_pixel_pos(BOARD_SIZE - 2), 50, obj_Pawn)
-	with current_pawn {
-		controller = "White" 
-		board = other
-		facing = "Up"
-	}
-	ds_list_add(white_piece_list, current_pawn)
-	with ds_grid_get(square_grid, i, BOARD_SIZE - 2) {
-		piece = other.current_pawn
-	}
+	create_piece(i, BOARD_SIZE - 2, obj_Pawn, "White", "Up")
 }
+
+//create black rooks
+create_piece(0, 0, obj_Rook, "Black", "Down")
+create_piece(BOARD_SIZE - 1, 0, obj_Rook, "Black", "Down")
+
+//create white rooks
+create_piece(0, BOARD_SIZE - 1, obj_Rook, "White", "Up")
+create_piece(BOARD_SIZE - 1, BOARD_SIZE - 1, obj_Rook, "White", "Up")

@@ -40,7 +40,15 @@ function is_legal_move(start_x, start_y, end_x, end_y, piece, actually_make_move
 	x_diff = end_x - start_x
 	y_diff = end_y - start_y
 	
-	//just pawn checking for now
+	//rook checking
+	if piece.object_index == obj_Rook {
+		if x_diff == 0 or y_diff == 0 {
+			if line_empty(start_x, start_y, end_x, end_y) return true
+		}
+		return false
+	}
+	
+	//pawn checking
 	if piece.object_index == obj_Pawn {
 		
 		//no horizontal movement allowed except capture
