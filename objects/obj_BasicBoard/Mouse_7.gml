@@ -9,6 +9,7 @@ if selected != -1 {
 	
 	//check legality of move
 	if is_legal_move(square_move_from.x_pos, square_move_from.y_pos, square_move_to.x_pos, square_move_to.y_pos, selected, true) {
+		
 		//update last moved
 		if last_moved != -1 with last_moved last_moved = false
 		last_moved = square_move_from.piece
