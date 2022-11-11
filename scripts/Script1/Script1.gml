@@ -48,6 +48,7 @@ function is_legal_move(start_x, start_y, end_x, end_y, piece, actually_make_move
 	
 	//bishop checking
 	if piece.object_index == obj_Bishop {
+		
 		//check for diagonal
 		if abs(x_diff) != abs(y_diff) return false
 		if line_empty(start_x, start_y, end_x, end_y) return true else return false
@@ -55,6 +56,7 @@ function is_legal_move(start_x, start_y, end_x, end_y, piece, actually_make_move
 	
 	//queen checking
 	if piece.object_index == obj_Queen {
+		
 		//check for one of horizontal, vertical, diagonal
 		if x_diff != 0 and y_diff != 0 and abs(x_diff) != abs(y_diff) return false
 		if line_empty(start_x, start_y, end_x, end_y) return true else return false
@@ -62,7 +64,33 @@ function is_legal_move(start_x, start_y, end_x, end_y, piece, actually_make_move
 	
 	//king checking
 	if piece.object_index == obj_King {
-		if abs(x_diff) > 1 or abs(y_diff) > 1 return false
+		
+		if abs(x_diff) > 2 or abs(y_diff) > 1 return false
+		if abs(x_diff) > 1 and abs(y_diff) != 0 return false //castling can only be fully horizontal
+		
+		//castling check
+		if abs(x_diff) == 2 {
+			//king must not have moved
+			if piece.moves != 0 return false
+			
+			//rook must be on that square and has not moved
+			//square is two away for queenside, one for kingside
+			if x_diff > 0 {
+				target_rook = get_piece(end_x + sign(x_diff), end_y)
+			}
+			else {
+				target_rook = get_piece(end_x + 2 * sign(x_diff), end_y)
+			}
+			if target_rook == -1 return false
+			if target_rook.object_index != obj_Rook return false
+			if target_rook.controller != piece.controller return false
+			if target_rook.moves != 0 return false
+			
+			//move rook
+			if actually_make_move {
+				move_piece(target_rook, piece.square.x_pos + (sign(x_diff)), target_rook.square.y_pos)
+			}
+		}
 		return true
 	}
 	
@@ -122,6 +150,12 @@ function is_legal_move(start_x, start_y, end_x, end_y, piece, actually_make_move
 	}
 }
 
+function get_piece(square_x, square_y) {
+	square_piece = ds_grid_get(square_grid, square_x, square_y).piece
+	if square_piece == -1 return -1
+	return square_piece.id
+}
+
 function piece_of_colour_on_square(square_x, square_y, colour) {
 	
 	//checks grid to see if a piece of said colour is on the square
@@ -131,12 +165,32 @@ function piece_of_colour_on_square(square_x, square_y, colour) {
 	
 }
 
+function piece_of_colour_on_square_type(square_x, square_y, colour) {
+	
+	//checks grid to see if a piece of said colour is on the square
+	//and if so returns its type
+	square_piece = ds_grid_get(square_grid, square_x, square_y).piece
+	if square_piece == -1 return -1
+	if square_piece.controller == colour return square_piece.object_index else return -1
+	
+}
+
 function piece_of_other_colour_on_square(square_x, square_y, colour) {
 	
 	//checks grid to see if a piece of another colour is on the square
 	square_piece = ds_grid_get(square_grid, square_x, square_y).piece
 	if square_piece == -1 return false
 	if square_piece.controller != colour return true else return false
+	
+}
+
+function piece_of_other_colour_on_square_type(square_x, square_y, colour) {
+	
+	//checks grid to see if a piece of another colour is on the square
+	//and if so return its type
+	square_piece = ds_grid_get(square_grid, square_x, square_y).piece
+	if square_piece == -1 return -1
+	if square_piece.controller != colour return square_piece.object_index else return -1
 	
 }
 
