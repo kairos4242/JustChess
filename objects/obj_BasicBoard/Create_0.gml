@@ -15,6 +15,9 @@ turn_queue = ds_queue_create()//will this even get used? Is it necessary? Could 
 ds_queue_enqueue(turn_queue, "White")
 ds_queue_enqueue(turn_queue, "Black")
 
+engine = "Builtin-Random" //planning to use fairy-stockfish for the backend
+player_turn = true //using this for turns for now
+
 
 //create all the squares at target positions
 for (i = 0; i < BOARD_SIZE; i++) {

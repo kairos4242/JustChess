@@ -24,16 +24,10 @@ if selected != -1 {
 		}
 		
 		//move piece
-		with square_move_from piece = -1
-		with square_move_to piece = other.selected
-		with selected {
-			x = other.square_move_to.x 
-			y = other.square_move_to.y
-			selected = false
-			moves++
-			square = other.square_move_to
-		}
+		move_piece(square_move_from.piece, square_move_to.x_pos, square_move_to.y_pos, true)
 		selected = -1
+		player_turn = false
+		get_engine_move()
 	} else {
 		with selected selected = false
 		selected = -1
