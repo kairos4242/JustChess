@@ -158,7 +158,7 @@ function is_legal_move(start_x, start_y, end_x, end_y, piece, actually_make_move
 		
 		//check for if double move allowed
 		if piece.moves == 0 {
-			if y_diff == (2 * facing_sign) and !piece_of_other_colour_on_square(end_x, end_y, piece.controller) return true
+			if y_diff == (2 * facing_sign) and !piece_of_other_colour_on_square(end_x, end_y, piece.controller) and line_empty(start_x, start_y, end_x, end_y) return true
 		}
 		
 		//then check single move
